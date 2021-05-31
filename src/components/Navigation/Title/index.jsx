@@ -159,8 +159,10 @@ const MainTitle = (props) => {
               {/* <Button type="primary" style={{ marginBottom: 16 ,display:loginBtnVisable?'none':'block'}}  >
          
         </Button> */}
+             <img src="https://avatars.githubusercontent.com/u/5392127?s=60&amp;v=4" style={{height:"20" ,width:"20",size:20,display: loginBtnVisable ? "none" : "block",borderRadius:'50%'}} alt="@gmail.com"
+              onClick={openCard}/>
               {/* 这里的按钮打开设置卡片 */}
-              <Button
+              {/* <Button
                 type="primary"
                 shape="circle"
                 // icon={<SearchOutlined />}
@@ -168,7 +170,7 @@ const MainTitle = (props) => {
                 style={{ display: loginBtnVisable ? "none" : "block" }}
                 className="icon_btn"
                 onClick={openCard}
-              />
+              /> */}
               <Modal
                 visible={isCardVisable}
                 footer={null}
