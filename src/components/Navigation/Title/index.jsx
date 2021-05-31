@@ -124,7 +124,7 @@ const MainTitle = (props) => {
                   type="primary"
                   shape="circle"
                   // icon={<SearchOutlined />}
-                  icon={<IconFont/>}
+                  icon={<IconFont type="icon-tx"/>}
                   style={{ display:loginBtnVisable?'none':'block'}}
                   className="icon_btn"
                 />
