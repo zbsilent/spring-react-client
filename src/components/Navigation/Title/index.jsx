@@ -1,20 +1,51 @@
 import "./index.css";
 import React, { useState } from "react";
-import { Layout, Menu, Button } from "antd";
-import { Modal, Form, Checkbox, Input, Tooltip } from "antd"; 
+import {} from "antd";
+import {
+  Modal,
+  Form,
+  Checkbox,
+  Input,
+  Card,
+  Avatar,
+  Collapse,
+  Layout,
+  Menu,
+  Button,
+  List,
+  Typography,
+} from "antd";
 import { IntlProvider, FormattedMessage } from "react-intl";
 import zh_CN from "../../../locales/zh_CN";
 import axios from "axios";
 import { createFromIconfontCN } from "@ant-design/icons";
+import {
+  EditOutlined,
+  EllipsisOutlined,
+  SettingOutlined,
+} from "@ant-design/icons";
 
+const { Meta } = Card;
 const { Header } = Layout;
- 
+const { Panel } = Collapse;
+const text = `
+  A dog is a type of domesticated animal.
+  Known for its loyalty and faithfulness,
+  it can be found as a welcome guest in many households across the world.
+`;
+const data = [
+  "Racing car sprays burning fuel into crowd.",
+  "Japanese princess to wed commoner.",
+  "Australian walks 100km after outback crash.",
+  "Man charged over missing wedding girl.",
+  "Los Angeles battles huge wildfires.",
+];
 export const IconFont = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_2582740_iwnumargvdr.js", // 在 iconfont.cn 上生成
 });
 
 export const IconFont2 = createFromIconfontCN({
-  scriptUrl:'iconfont.js', // 在 iconfont.cn 上生成
+  scriptUrl: "iconfont.js", // 在 iconfont.cn 上生成
 });
 const layout = {
   labelCol: {
@@ -34,6 +65,8 @@ const MainTitle = (props) => {
   /** 设置默认的语言为zhcn */
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isCardVisable, setIsCardVisable] = useState(false);
+
   const [loginBtnVisable, setLoginBtnVisable] = useState(true);
   const [collapsed, setCollapsed] = useState(false);
   const showModal = () => {
@@ -47,6 +80,7 @@ const MainTitle = (props) => {
 
   const handleCancel = () => {
     setIsModalVisible(false);
+    setIsCardVisable(false);
   };
 
   /** axios访问 */
@@ -85,8 +119,14 @@ const MainTitle = (props) => {
   const onFinishFailed = (errorInfo) => {
     console.log("Failed:", errorInfo);
   };
- 
 
+  const openCard = () => {
+    setIsCardVisable(true);
+  };
+
+  function callback(key) {
+    console.log(key);
+  }
   return (
     <div>
       <IntlProvider locale={zh_CN} key={zh_CN} messages={zh_CN}>
@@ -119,16 +159,84 @@ const MainTitle = (props) => {
               {/* <Button type="primary" style={{ marginBottom: 16 ,display:loginBtnVisable?'none':'block'}}  >
          
         </Button> */}
-              <Tooltip title="search">
-                <Button
-                  type="primary"
-                  shape="circle"
-                  // icon={<SearchOutlined />}
-                  icon={<IconFont type="icon-tx"/>}
-                  style={{ display:loginBtnVisable?'none':'block'}}
-                  className="icon_btn"
-                />
-              </Tooltip>
+              {/* 这里的按钮打开设置卡片 */}
+              <Button
+                type="primary"
+                shape="circle"
+                // icon={<SearchOutlined />}
+                icon={<IconFont type="icon-tx" />}
+                style={{ display: loginBtnVisable ? "none" : "block" }}
+                className="icon_btn"
+                onClick={openCard}
+              />
+              <Modal
+                visible={isCardVisable}
+                footer={null}
+                centered={false}
+                width="350px"
+                // closable={false}
+                onCancel={handleCancel}
+                keyboard
+                style={{ left: "595px", top: "49px", height: "350px" }}
+              >
+                <Card style={{ width: 300, marginTop: 16 }}>
+                  <Meta
+                    avatar={
+                      <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    }
+                    title="Card title"
+                    description="This is the description"
+                  />
+                </Card>
+                <Card
+                  style={{ width: 300 }}
+                  bordered={false}
+                  // cover={
+                  //   <img
+                  //     alt="example"
+                  //     src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+                  //   />
+                  // }
+                  actions={[
+                    <SettingOutlined key="setting" />,
+                    <EditOutlined key="edit" />,
+                    <EllipsisOutlined key="ellipsis" />,
+                  ]}
+                >
+                  {/* <Meta
+                    // avatar={
+                    //   <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                    // }
+                    title="Card title"
+                    description="This is the description"
+                  /> */}
+                  {/* 幽灵折叠面板 */}
+                  {/* <Collapse defaultActiveKey={["1"]} onChange={callback} ghost>
+                    <Panel header="This is panel header 1" key="1">
+                      <p>{text}</p>
+                    </Panel>
+                    <Panel header="This is panel header 2" key="2">
+                      <p>{text}</p>
+                    </Panel>
+                    <Panel header="This is panel header 3" key="3">
+                      <p>{text}</p>
+                    </Panel>
+                  </Collapse> */}
+                  <List
+                    style={{ left: "-20px" }}
+                    // header={<div>Header</div>}
+                    // footer={<div>Footer</div>}
+                    split={false}
+                    bordered={false}
+                    dataSource={data}
+                    renderItem={(item) => (
+                      <List.Item>
+                        <Typography.Text mark>[ITEM]</Typography.Text> {item}
+                      </List.Item>
+                    )}
+                  />
+                </Card>
+              </Modal>
               <Modal
                 title="Basic Modal"
                 visible={isModalVisible}
@@ -144,9 +252,11 @@ const MainTitle = (props) => {
                   }}
                   onFinish={onFinish}
                   onFinishFailed={onFinishFailed}
+                  style={{left:'20px'}}
                 >
                   <Form.Item
                     label="Username"
+                    labelAlign="left"
                     name="username"
                     rules={[
                       {
@@ -160,6 +270,7 @@ const MainTitle = (props) => {
 
                   <Form.Item
                     label="Password"
+                    labelAlign="left"
                     name="password"
                     rules={[
                       {
@@ -173,6 +284,7 @@ const MainTitle = (props) => {
 
                   <Form.Item
                     {...tailLayout}
+                    style={{margin: '0px 0px 0px -220px'}}
                     name="remember"
                     valuePropName="checked"
                   >

@@ -78,7 +78,7 @@ const MainPage = () => {
           </Layout>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Ant Design ©2018 Created by Ant UED
+          Reno Design ©2021 Created by zbsilent@gmail.com personal 😂
         </Footer>
       </Layout>
     </div>
