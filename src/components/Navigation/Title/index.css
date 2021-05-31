@@ -1,0 +1,41 @@
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 28px 16px 0;
+  float: left;
+}
+
+button.ant-btn.ant-btn-primary.btnPri {
+  float: right;
+  margin-top: 17px;
+  color: #000;
+  background-color: blue;
+}
+.ant-dropdown-link{
+  /* background-color: honeydew; */
+  margin: 0px 0px 230px 1085px;
+}
+ 
+.div_btn_1{
+  float: right;
+  margin-top: 17px;
+  color: #000;
+  /* background-color: blue; */
+  display: flex;
+  height: 30px;
+}
+.h_hh_hhh{
+  color: white;
+  float: right;
+  background-color: red;
+  margin: 30px 20px;
+  width: 100px;
+  height: 100px;
+}
+.icon_act{
+  width: 100px;
+}
+/* .icon_btn{
+  background-image: url("//at.alicdn.com/t/font_2582740_iwnumargvdr.js");
+} */

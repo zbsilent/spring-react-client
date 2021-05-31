@@ -1,4 +1,6 @@
 import React from "react";
+import 'antd/dist/antd.css';
+import MainTitle from "../Navigation/Title/index"
 import "./index.css";
 import { Layout, Menu, Breadcrumb } from "antd";
 // import Icon from "@ant-design/icons";
@@ -10,7 +12,7 @@ const MainPage = () => {
   return (
     <div>
       <Layout>
-        {/* <Header /> */}
+        <MainTitle />
         <Content style={{ padding: "0 50px" }}>
           <Breadcrumb style={{ margin: "16px 0" }}>
             <Breadcrumb.Item>Home</Breadcrumb.Item>
